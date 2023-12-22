@@ -1,0 +1,25 @@
+body {
+    background-color: black;
+    color: white;
+    font-size: larger;
+}
+
+a {
+    color: aquamarine;
+    text-decoration: none;
+}
+
+div.project {
+    border-width: 3px;
+    border-color: whitesmoke;
+    border-style: dashed;
+    padding: 1%;
+    background-color: rgb(80, 78, 78);
+}
+
+div.projects {
+    background-color: rgb(30, 29, 29);
+    border-style: dashed;
+    border-width: 5px;
+    padding: 1%
+}
