@@ -1,0 +1,12 @@
+body {
+    background-color: black;
+}
+
+a.about_link {
+    text-decoration: none;
+    color: white;
+}
+
+h1.about_link_h1 :hover {
+    color: aqua;
+}
