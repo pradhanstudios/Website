@@ -14,5 +14,13 @@ def ritik_about():
 def samik_about():
     return render_template("Samik/about.html")
 
+@app.route("/Programs")
+def programs_page():
+    return render_template("Python_Programs/programs.html")
+
+@app.route("/Python_Programs/Word_Counter")
+def word_counter_page():
+    return render_template("Python_Programs/Word_Counter/word_counter.html")
+
 if __name__ == "__main__":
     app.run(debug=True)
