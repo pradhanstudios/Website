@@ -7,11 +7,20 @@
     <title>Word Counter</title>
 </head>
 <body>
-    <h1>Text -></h1>
+    <h1>Text</h1>
     <form action="./Word_Counter" method="POST">
-        <input type="text" name="words">
+        <input type="text" name="words"> <br>
         <button type="submit">Get the word count</button>
     </form>
-    <h2 class="answer" id="answer_word_count"> {{ count }} </h2>
+    <h1>Words:</h1>
+    <ul class="words_list">
+        {% for item in count %}
+            <ul class="word">
+                <h1 class="words_word">{{ item.word }}</h1>
+                <h1 class="word_counter">{{ item.num }}</h1>
+            </ul>
+            <br />
+        {% endfor %}
+    </ul>
 </body>
 </html>

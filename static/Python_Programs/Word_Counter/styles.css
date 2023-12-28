@@ -2,3 +2,23 @@ body {
     background-color: black;
     color: white;
 }
+
+ul.words_list {
+    background-color: rgb(49, 49, 49);
+    padding: 1%;
+    border-style: dashed;
+}
+
+ul.word {
+    display: flex;
+    text-align: center;
+}
+
+h1.word_counter {
+    padding-left: 50%;
+}
+
+input[type="text"] {
+    width: 50%;
+
+}

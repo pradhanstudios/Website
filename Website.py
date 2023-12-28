@@ -25,7 +25,20 @@ def word_counter_page():
         return render_template("Python_Programs/Word_Counter/word_counter.html")
     elif request.method == 'POST':
         words = request.form["words"]     
-        count = str(count_words.word_count(words))
+        count = count_words.word_count(words)
+        count = {k: v for k, v in sorted(count.items(), key=lambda item: item[1], reverse=True)}
+        count = [{"word": word, "num": num} for word, num in count.items()]
+        # word_ul = '''
+        # <ul class="word">
+        #     <h1 class="words_word">{}</h1>
+        #     <h1 class="word_count">{}</h1>
+        # </ul>
+        # '''
+
+        # formatted = ""
+        # for word, num in count.items():
+        #     formatted += word_ul.format(word, num)
+
         return render_template("Python_Programs/Word_Counter/word_counter.html", count=count) 
 
 
