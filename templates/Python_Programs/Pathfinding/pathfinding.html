@@ -1,0 +1,35 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Pathfinding</title>
+    <link rel="stylesheet" href="{{ url_for('static', filename='Python_Programs/Pathfinding/styles.css') }}">
+</head>
+<body>
+    <script>
+        function send_data(arr, start, end) {
+            window.location.href = 'Pathfinding?arr=' + String(arr) + "&start=" + String(start) + "&end=" + String(end);
+            return false;
+        }
+    </script>
+    <input type="range" min="5" max="10" value="5" id="range_slider"> 
+    <p id="range_slider_display"></p>
+
+
+
+
+
+
+
+    <script>
+        var slider = document.getElementById("range_slider")
+        var shower = document.getElementById("range_slider_display")
+        shower.innerHTML = slider.value;
+
+        slider.oninput = function() {
+            shower.innerHTML = this.value;
+        }
+    </script>
+</body>
+</html>

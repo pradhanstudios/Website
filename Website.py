@@ -1,4 +1,4 @@
-from flask import Flask, render_template, request
+from flask import Flask, render_template, request, url_for
 from python_scripts import count_words
 
 app = Flask(__name__)
@@ -19,7 +19,7 @@ def samik_about():
 def programs_page():
     return render_template("Python_Programs/programs.html")
 
-@app.route("/Python_Programs/Word_Counter", methods=['GET', 'POST'])
+@app.route("/Programs/Word_Counter", methods=['GET', 'POST'])
 def word_counter_page():
     if request.method == 'GET':
         return render_template("Python_Programs/Word_Counter/word_counter.html")
@@ -41,7 +41,11 @@ def word_counter_page():
 
         return render_template("Python_Programs/Word_Counter/word_counter.html", count=count) 
 
-
+@app.route("/Programs/Pathfinding")
+def pathfinding_page():
+    if (arr := request.args.get("arr")) and (start := request.args.get("start")) and (end := request.args.get("end")):
+        return f'''{arr} | {start} | {end}'''
+    return render_template("Python_Programs/Pathfinding/pathfinding.html")
 
 if __name__ == "__main__":
     app.run(debug=True)
