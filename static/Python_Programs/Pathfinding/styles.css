@@ -2,3 +2,15 @@ body {
     background-color: black;
     color: white;
 }
+
+td.cell {
+    font-size: 100px;
+    background-color: white;
+    margin: 0px;
+    padding: 0px;
+}
+
+#grid {
+    margin-left: auto;
+    margin-right: auto;
+}

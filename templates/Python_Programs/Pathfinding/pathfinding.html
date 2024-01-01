@@ -12,23 +12,86 @@
             window.location.href = 'Pathfinding?arr=' + String(arr) + "&start=" + String(start) + "&end=" + String(end);
             return false;
         }
+        function remove_all_children(parent) {
+            while (parent.firstChild) {
+                parent.removeChild(parent.lastChild);
+            }
+        }
     </script>
+
+    <table id="grid">
+        <tr class="row">
+            <td class="cell">{}</td>
+            <td class="cell">{}</td>
+            <td class="cell">{}</td>
+            <td class="cell">{}</td>
+            <td class="cell">{}</td>
+        </tr>
+        <tr class="row">
+            <td class="cell">{}</td>
+            <td class="cell">{}</td>
+            <td class="cell">{}</td>
+            <td class="cell">{}</td>
+            <td class="cell">{}</td>
+        </tr>
+        <tr class="row">
+            <td class="cell">{}</td>
+            <td class="cell">{}</td>
+            <td class="cell">{}</td>
+            <td class="cell">{}</td>
+            <td class="cell">{}</td>
+        </tr>
+        <tr class="row">
+            <td class="cell">{}</td>
+            <td class="cell">{}</td>
+            <td class="cell">{}</td>
+            <td class="cell">{}</td>
+            <td class="cell">{}</td>
+        </tr>
+        <tr class="row">
+            <td class="cell">{}</td>
+            <td class="cell">{}</td>
+            <td class="cell">{}</td>
+            <td class="cell">{}</td>
+            <td class="cell">{}</td>
+        </tr>
+    </table>
+
+
     <input type="range" min="5" max="10" value="5" id="range_slider"> 
     <p id="range_slider_display"></p>
 
-
-
-
-
-
-
     <script>
-        var slider = document.getElementById("range_slider")
-        var shower = document.getElementById("range_slider_display")
-        shower.innerHTML = slider.value;
+        const grid_size = 500;
+        var grid = document.getElementById("grid");
+        var slider = document.getElementById("range_slider");
+        var shower = document.getElementById("range_slider_display");
+        var start = [];
+        var end = [];
+        var board = [];
+        shower.innerHTML = "5X5";
+        // create_new_grid(5);
+
+        function create_new_grid(size) {
+            // var board = Array.from({ length: size }, () => new Array(size).fill(0));
+            remove_all_children(grid);
+            for (let i = 0; i <= size; i++) {
+                let cur_row = document.createElement("tr");
+                cur_row.className = "row";
+                for (let j = 0; j <= size; j++) {
+                    let cur_cell = document.createElement("td");
+                    cur_cell.className = "cell";
+                    cur_cell.innerHTML = "{}";
+                    cur_row.appendChild(cur_cell);
+                }
+                grid.appendChild(cur_row);
+            }
+
+        }
 
         slider.oninput = function() {
-            shower.innerHTML = this.value;
+            shower.innerHTML = String(this.value) + "X" + String(this.value);
+            create_new_grid(this.value);
         }
     </script>
 </body>
