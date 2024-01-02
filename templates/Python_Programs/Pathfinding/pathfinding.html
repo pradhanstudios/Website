@@ -8,8 +8,9 @@
 </head>
 <body>
     <script>
-        function send_data(arr, start, end) {
-            window.location.href = 'Pathfinding?arr=' + String(arr) + "&start=" + String(start) + "&end=" + String(end);
+        function send_data(arr, start, end, size) {
+            arr
+            window.location.href = 'Pathfinding?arr=' + encodeURIComponent(JSON.stringify(arr)) + "&start=" + String(start) + "&end=" + String(end) + "&size=" + String(size);
             return false;
         }
         function remove_all_children(parent) {
@@ -32,9 +33,10 @@
     <input type="button" value="Place Blockers" onclick="check('b');" id="block">
     <input type="button" value="Place Start" onclick="check('s');" id="start">
     <input type="button" value="Place End" onclick="check('e');" id="end">
+    <br>
+    <button id="submitbutton" onclick="send_data(board, start, end, slider.value);">Find shortest path</button>
 
     <script>
-        const grid_size = 500;
         var grid = document.getElementById("grid");
         var slider = document.getElementById("range_slider");
         var shower = document.getElementById("range_slider_display");
@@ -52,6 +54,8 @@
                     for (let j = 0; j < size; j++) {
                         if (board[i][j] == 1) {
                             board[i][j] = 0;
+                            grid.rows[i].cells[j].style.backgroundColor = 'WHITE';
+                            grid.rows[i].cells[j].style.color = 'WHITE';
                         }
                     }
                 }
@@ -74,6 +78,8 @@
                     for (let j = 0; j < size; j++) {
                         if (board[i][j] == 2) {
                             board[i][j] = 0;
+                            grid.rows[i].cells[j].style.backgroundColor = 'WHITE';
+                            grid.rows[i].cells[j].style.color = 'WHITE';
                         }
                     }
                 }
@@ -108,6 +114,7 @@
 
         function create_new_grid(size) {
             board = Array.from({ length: size }, () => new Array(size).fill(0));
+            // board = Array(size).fill().map(() => Array(size).fill(0));
             remove_all_children(grid);
             for (let i = 0; i < size; i++) {
                 let cur_row = document.createElement("tr");
