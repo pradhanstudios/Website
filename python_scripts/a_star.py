@@ -100,7 +100,7 @@ class A_Star:
 
     def get_f_cost(self, t):
         if self.in_bound(t):
-            return self.dist_from(self.start, t) + self.dist_from(self.end, t)
+            return self.dist_from(self.end, t)
         else:
             return 0
 
@@ -142,6 +142,7 @@ class A_Star:
         return self.explore(self.queue.pop().coords)
 
 def use_a_star(arr, start, end):
+    # print(arr, start, end)
     a_star = A_Star(arr, start, end)
     try: 
         score, path = a_star.explore(start)
@@ -151,11 +152,12 @@ def use_a_star(arr, start, end):
 
 
 if __name__ == "__main__":
-    print(use_a_star(
-        [[1, 0, 0, 0], [0, 9, 0, 0], [0, 9, 0, 0], [9, 9, 0, 0], [2, 0, 0, 0]],
-        (0, 0),
+    path, score = (use_a_star(
+        [[0, 0, 0, 0, 1], [0, 0, 0, 0, 0], [0, 0, 0, 0, 0], [0, 0, 0, 0, 0], [0, 0, 0, 0, 0], [2, 0, 0, 0, 0]],
+        (0, 4),
         (4, 0),
     ))
+    print(path)
     # try:
     #     score, path = a_star.explore((0, 0))
     #     print(f"solution is {path[::-1]};")

@@ -1,0 +1,64 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Pathfinding</title>
+    <link rel="stylesheet" href="{{ url_for('static', filename='Python_Programs/Pathfinding/Show/styles.css') }}">
+    <!-- not here either -->
+</head>
+<body>
+
+    <table id="grid">
+
+    </table>
+    <button onclick="window.location.href = 'Pathfinding';">Create another path</button>
+    <h1>{{ error }}</h1>
+     <script>
+        function get_function_parameters() {
+            let values = {};
+            let query = window.location.search.substring(1);
+            let vars = query.split("&");
+            for (let i = 0; i < vars.length; i++) {
+                let vals = vars[i].split('=');
+                values[vals[0]] = vals[1]
+            }
+            return values;
+        }
+
+        var values = get_function_parameters()
+        var grid = document.getElementById("grid");
+        var start = values["start"];
+        var end = values["end"];
+        console.log(start[1]);
+        create_new_grid(values["size"]);
+        function create_new_grid(size) {
+            for (let i = 0; i < size; i++) {
+                let cur_row = document.createElement("tr");
+                cur_row.className = "row";
+                for (let j = 0; j < size; j++) {
+                    let cur_cell = document.createElement("td");
+                    cur_cell.className = "cell";
+                    cur_cell.innerHTML = "{}";
+                    cur_cell.ondragstart = function () { return false; }
+                    cur_row.appendChild(cur_cell);
+                }
+                grid.appendChild(cur_row);
+            }
+            {% for item in path %}
+                grid.rows[{{ item.x }}].cells[{{ item.y }}].style.backgroundColor = 'ORANGE';
+                grid.rows[{{ item.x }}].cells[{{ item.y }}].style.color = 'ORANGE';
+            {% endfor %}
+
+            grid.rows[start[0]].cells[start[2]].style.backgroundColor = 'YELLOW';
+            grid.rows[start[0]].cells[start[2]].style.color = 'YELLOW';
+            grid.rows[end[0]].cells[end[2]].style.backgroundColor = 'YELLOW';
+            grid.rows[end[0]].cells[end[2]].style.color = 'YELLOW';
+            {% for item in blockers %}
+                grid.rows[{{ item.x }}].cells[{{ item.y }}].style.backgroundColor = 'RED';
+                grid.rows[{{ item.x }}].cells[{{ item.y }}].style.color = 'RED';
+            {% endfor %}
+        }
+     </script>
+</body>
+</html>

@@ -1,5 +1,5 @@
 from flask import Flask, render_template, request, url_for
-from python_scripts import count_words
+from python_scripts import count_words, a_star
 import json
 
 app = Flask(__name__)
@@ -48,6 +48,10 @@ def pathfinding_page():
     if (arr := request.args.get("arr")) and (start := request.args.get("start")) and (end := request.args.get("end")) and (size := request.args.get("size")):
         arr = json.loads(arr)
         size = int(size)
+        blockers = []
+        start = tuple(map(lambda x: int(x), tuple(start.split(','))))
+        end = tuple(map(lambda x: int(x), tuple(end.split(','))))
+        # print(start, type(start), end, type(end))
         # print(arr)
         # for some reason the json stringify gets rid of all of the zeros after the last number and it makes zeroes null ????
         for i in range(size):
@@ -55,9 +59,19 @@ def pathfinding_page():
             for j in range(N):
                 if arr[i][j] == None:
                     arr[i][j] = 0
+                elif arr[i][j] == 9:
+                    blockers.append({"x": i, "y": j})
             arr[i] += [0] * (size - N)
+        path, moves = a_star.use_a_star(arr, start, end)
+        # path = 0
+        # print(path)
+        if path != "No Solution":
+            path = [{"x": coord[0], "y": coord[1]} for coord in path]
+        # print(path)
             
-        return f'''{arr} | {start} | {end} | {size}'''
+            return render_template("Python_Programs/Pathfinding/Show/show.html", blockers=blockers, path=path)
+        else:
+            return render_template("Python_Programs/Pathfinding/Show/show.html", blockers=blockers, error="No Solution")
     return render_template("Python_Programs/Pathfinding/pathfinding.html")
 
 if __name__ == "__main__":
