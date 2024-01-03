@@ -18,7 +18,7 @@ h1.word_counter {
     padding-left: 50%;
 }
 
-input[type="text"] {
+#textbox {
     width: 50%;
-
+    display: inline-block;
 }

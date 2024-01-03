@@ -1,4 +1,5 @@
 def word_count(s):
+    s = s.replace(',', ' ').replace('.', ' ').replace(';', ' ').replace("\'", ' ').replace('\"', ' ').replace('(', ' ').replace(')', ' ').replace('?', ' ').replace('\“', ' ').replace('\”', ' ')
     temp = {}
 
     s = s.split()

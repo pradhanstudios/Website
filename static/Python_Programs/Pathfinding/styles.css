@@ -28,3 +28,7 @@ td.cell {
 #end {
     background-color: yellow;
 }
+
+a {
+    color: inherit;
+}
