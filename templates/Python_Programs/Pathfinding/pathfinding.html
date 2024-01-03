@@ -116,6 +116,7 @@
         }}
 
         function create_new_grid(size) {
+            size = Math.min(size, 10);
             board = Array.from({ length: size }, () => new Array(size).fill(0));
             // board = Array(size).fill().map(() => Array(size).fill(0));
             remove_all_children(grid);
